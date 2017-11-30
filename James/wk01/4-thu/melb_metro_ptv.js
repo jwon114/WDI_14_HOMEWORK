@@ -4,8 +4,8 @@ var ptv = {
 	sandringham: ['southern cross', 'richmond', 'south yarra', 'prahran', 'windsor']
 }
 
-var origin = 'flagstaff';
-var destination = 'windsor';
+var origin = 'flinders street';
+var destination = 'glenferrie';
 // var origin = prompt('Enter your origin');
 // var destination = prompt('Enter your destination');
 var start_train_line = '';
@@ -51,9 +51,6 @@ if (origin !== destination) {
 		var line1_richmond_index = ptv[start_train_line].indexOf('richmond');
 		var line2_richmond_index = ptv[end_train_line].indexOf('richmond');
 
-		console.log('line1_richmond_index', line1_richmond_index);
-		console.log('line2_richmond_index', line2_richmond_index);
-
 		// Slice the sections of the lines
 		if ((start_index < line1_richmond_index) && (line2_richmond_index < end_index)) {
 			// Right Right
@@ -79,14 +76,10 @@ if (origin !== destination) {
 
 		journeyArr.push(path1);
 		journeyArr.push(path2);
-
-		console.log('path1', path1);
-		console.log('path2', path2);
 	}
 
 	// Reduces the array of arrays into a single level array
 	journeyArr = journeyArr.reduce((prev,curr) => prev.concat(curr));
-	console.log('journeyArr', journeyArr);
 
 	// DEBUG
 	console.log('start line', start_train_line);
@@ -95,6 +88,13 @@ if (origin !== destination) {
 	console.log('start index', start_index);
 	console.log('end index', end_index);
 
+	console.log('line1_richmond_index', line1_richmond_index);
+	console.log('line2_richmond_index', line2_richmond_index);
+
+	console.log('path1', path1);
+	console.log('path2', path2);
+
+	console.log('journeyArr', journeyArr);
 
 	// Print out to screen the output
 	console.log('origin: ' + origin);
