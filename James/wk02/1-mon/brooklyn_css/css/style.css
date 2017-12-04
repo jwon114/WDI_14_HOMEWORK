@@ -1,0 +1,38 @@
+body {
+	width: 85%;
+	margin: 0 auto;
+}
+
+h1 {
+	font-size: 40px;
+	color: grey;
+}
+
+h2 {
+	color: grey;
+}
+
+.header img {
+	width: 100%;
+	height: auto;
+}
+
+.press img {
+	width: 24%;
+	height: auto;
+	border: 4px solid grey;
+}
+
+.main_text > p > a {
+	color: blue;
+	text-decoration: none;
+}
+
+.main_text p,
+footer p {
+	color: grey;
+}
+
+.main_text .highlight_text {
+	color: blue;
+}
