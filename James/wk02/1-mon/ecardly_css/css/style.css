@@ -22,7 +22,7 @@ body {
 	text-align: center;
 }
 
-.main {
+main {
 	display: inline-block;
 	padding: 30px 30px 80px 30px;
 	background-color: white;
@@ -31,7 +31,7 @@ body {
 	text-align: left;
 }
 
-.main img {
+main img {
 	width: 100%;
 	height: auto;
 }

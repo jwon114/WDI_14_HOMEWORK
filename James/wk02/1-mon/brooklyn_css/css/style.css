@@ -28,17 +28,17 @@ h2 {
 	border: 4px solid grey;
 }
 
-.main_text > p > a {
+main > p > a {
 	color: dodgerblue;
 	text-decoration: none;
 }
 
-.main_text p,
+main p,
 footer p {
 	color: grey;
 }
 
-.main_text .highlight_text {
+main .highlight_text {
 	color: dodgerblue;
 }
 
