@@ -31,7 +31,7 @@ main {
 	text-align: left;
 }
 
-main img {
+main article img {
 	width: 100%;
 	height: auto;
 }
@@ -39,6 +39,14 @@ main img {
 .highlight {
 	color: red;
 	font-weight: 600;
+}
+
+article footer {
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	padding: 10px 0;
+	text-align: left;
+	margin: 20px 0;
 }
 
 aside {
