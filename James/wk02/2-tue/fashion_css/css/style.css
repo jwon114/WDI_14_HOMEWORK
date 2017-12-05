@@ -1,0 +1,163 @@
+body {
+	width: 70%;
+	margin: 0 auto;
+}
+
+header .header_container h1 {
+	font-size: 50px;
+	font-weight: 100;
+	display: inline-block;
+	color: red;
+	margin-bottom: 0;
+}
+
+header .header_container h2 {
+	font-weight: 100;
+	display: inline-block;
+	color: grey;
+	margin-left: 25px;
+}
+
+nav ul {
+	display: flex;
+	justify-content: space-between;
+	padding: 0;
+	margin-top: 0;
+}
+
+nav ul li {
+	list-style-type: none;
+	text-align: center;
+	margin: 0 1px;
+	padding: 10px 0;
+	color: white;
+	background-color: black;
+	margin-right: 2px;
+	font-size: 20px;
+	flex: 1;
+}
+
+nav ul li:last-child {
+	margin-right: 0;
+}
+
+main {
+	display: inline-block;
+	vertical-align: top;
+	width: 68%;
+}
+
+main article {
+	border-bottom: 1px solid gray;
+	padding-top: 30px;
+}
+
+main article img {
+	width: 100%;
+}
+
+main article p:first-of-type:first-letter {
+	color: lightgray;
+	float: left;
+	font-size: 75px;
+	line-height: 60px;
+	padding-top: 4px;
+	padding-right: 12px;
+	padding-left: 3px;
+}
+
+main article h2:first-child {
+	color: grey;
+	font-weight: 100;
+	margin-bottom: 0;
+}
+
+main article h2 {
+	font-weight: 100;
+	margin-top: 0;
+}
+
+.red_right {
+	display: flex;
+	justify-content: flex-end;
+	color: red;
+	font-weight: 600;
+	margin-bottom: 30px;
+}
+
+aside {
+	display: inline-block;
+	vertical-align: top;
+	width: 28%;
+	margin-left: 3%;
+	margin-top: 4%;
+	/*border: 1px solid black;*/
+}
+
+aside img {
+	width: 100%;
+}
+
+aside .block {
+	padding: 20px 0;
+}
+
+aside .block:first-child {
+	padding-top: 0;
+}
+
+aside .about_us_container {
+	border-bottom: solid 1px gray;
+}
+
+aside .about_us_container h3 {
+	color: gray;
+	font-weight: 600;
+}
+
+aside .about_us_container .about_us_text {
+	color: gray;
+}
+
+aside .popular_posts_container {
+	border-top: 1px solid gray;
+}
+
+aside .popular_posts_container h3 {
+	margin-top: 0;
+	color: gray;
+}
+
+aside .popular_posts_container ul {
+	color: gray;
+}
+
+aside .popular_posts_container ul li span {
+	color: red;
+}
+
+footer ul {
+	display: flex;
+	justify-content: flex-start;
+	padding-left: 0;
+	margin-top: 40px;
+	margin-bottom: 20px;
+}
+
+footer ul li {
+	list-style-type: none;
+	margin-right: 4px;
+	border-right: 1px solid lightgray;
+	padding: 4px 4px 4px 0;
+	color: red;
+}
+
+footer ul li:last-child {
+	border-right: none;
+}
+
+footer .copyright {
+	color: gray;
+}
+
+
