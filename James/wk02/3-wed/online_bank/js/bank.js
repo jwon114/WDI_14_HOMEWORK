@@ -12,14 +12,21 @@ var checkingWithdraw = document.querySelector('.checking .savings_button');
 var checkingInput = document.querySelector('.checking .amount_input');
 var checkingAmount = document.querySelector('.checking .balance');
 
+// GLOBALS
 var savingsBalance = 100;
 var checkingBalance = 100;
+var balance;
+var input;
+var container;
+var amount;
+
+// regex for any number or decimal
+var checkNumber = /(^[0-9]*$)|([0-9]*\.[0-9]*$)/;
 
 // initialise the balances
 savingsAmount.textContent = '$' + savingsBalance.toFixed(2);
 checkingAmount.textContent = '$' + checkingBalance.toFixed(2);
 
-var checkNumber = /^[0-9]*$/;
 
 // METHOD1 adding an event listener (preferred method)
 savingsDeposit.addEventListener('click', () => depositAccount('savings'));
@@ -28,19 +35,7 @@ checkingDeposit.addEventListener('click', () => depositAccount('checking'));
 checkingWithdraw.addEventListener('click', () => withdrawAccount('checking'));
 
 function depositAccount(account) {
-	if (account === 'savings') {
-		var balance = savingsBalance;
-		var input = Number(savingsInput.value);
-		var container = savingsContainer;
-		var amount = savingsAmount;
-	}
-
-	if (account === 'checking') {
-		var balance = checkingBalance;
-		var input = Number(checkingInput.value);
-		var container = checkingContainer;
-		var amount = checkingAmount;		
-	}
+	accountSettings(account);
 
 	if (checkNumber.test(input)) {
 		balance += input;
@@ -52,19 +47,7 @@ function depositAccount(account) {
 }
 
 function withdrawAccount(account) {
-	if (account === 'savings') {
-		var balance = savingsBalance;
-		var input = Number(savingsInput.value);
-		var container = savingsContainer;
-		var amount = savingsAmount;
-	}
-
-	if (account === 'checking') {
-		var balance = checkingBalance;
-		var input = Number(checkingInput.value);
-		var container = checkingContainer;
-		var amount = checkingAmount;		
-	}
+	accountSettings(account);
 
 	if (checkNumber.test(input)) {
 		// cannot withdraw more than both accounts combined
@@ -94,6 +77,22 @@ function withdrawAccount(account) {
 		if (account === 'checking') { checkingBalance = balance; }
 		changeAccountBackground(balance, container);
 		printNewBalance(balance, amount);
+	}
+}
+
+function accountSettings(account) {
+	if (account === 'savings') {
+		balance = savingsBalance;
+		input = Number(savingsInput.value);
+		container = savingsContainer;
+		amount = savingsAmount;
+	}
+
+	if (account === 'checking') {
+		balance = checkingBalance;
+		input = Number(checkingInput.value);
+		container = checkingContainer;
+		amount = checkingAmount;		
 	}
 }
 
