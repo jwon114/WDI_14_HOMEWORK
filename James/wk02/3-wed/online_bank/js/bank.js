@@ -22,12 +22,12 @@ checkingAmount.textContent = '$' + checkingBalance.toFixed(2);
 var checkNumber = /^[0-9]*$/;
 
 // METHOD1 adding an event listener (preferred method)
-savingsDeposit.addEventListener('click', () => actionAccount('savings', 'deposit'));
-savingsWithdraw.addEventListener('click', () => actionAccount('savings', 'withdraw'));
-checkingDeposit.addEventListener('click', () => actionAccount('checking', 'deposit'));
-checkingWithdraw.addEventListener('click', () => actionAccount('checking', 'withdraw'));
+savingsDeposit.addEventListener('click', () => depositAccount('savings'));
+savingsWithdraw.addEventListener('click', () => withdrawAccount('savings'));
+checkingDeposit.addEventListener('click', () => depositAccount('checking'));
+checkingWithdraw.addEventListener('click', () => withdrawAccount('checking'));
 
-function actionAccount(account, action) {
+function depositAccount(account) {
 	if (account === 'savings') {
 		var balance = savingsBalance;
 		var input = Number(savingsInput.value);
@@ -42,55 +42,59 @@ function actionAccount(account, action) {
 		var amount = checkingAmount;		
 	}
 
-	if (checkNumber.test(input) && (input <= (savingsBalance + checkingBalance))) {
-		if (input > balance) {
-			// overdraft
-			var remaining = input - balance;
-			console.log('remaining', remaining);
-			if (account === 'savings') {
-				savingsBalance = 0;
-				// subtract remaining from other acc
-				checkingBalance -= remaining;
-			}
+	if (checkNumber.test(input)) {
+		balance += input;
+		if (account === 'savings') { savingsBalance = balance; } 
+		if (account === 'checking') { checkingBalance = balance; }
+		changeAccountBackground(balance, container);
+		printNewBalance(balance, amount);
+	}
+}
 
-			if (account === 'checking') {
-				checkingBalance = 0;
-				savingsBalance -= remaining;
-			}
-
-			changeAccountBackground(checkingBalance, checkingContainer);
-			changeAccountBackground(savingsBalance, savingsContainer);
-			printNewBalance(checkingBalance, checkingAmount);
-			printNewBalance(savingsBalance, savingsAmount);
-
-			console.log('balance', balance);
-			console.log('savingsBalance', savingsBalance);
-			console.log('checkingBalance', checkingBalance);
-		} else {
-
-			if (action === 'deposit') {
-				balance += input;
-			}
-			if (action === 'withdraw') {
-				balance -= input;
-			}
-			// don't let balance go negative
-			if (balance < 0) { balance = 0 }
-			
-			// change colour of background
-			changeAccountBackground(balance, container);
-			// balance === 0 ? container.classList.add('zero_balance') : container.classList.remove('zero_balance');
-
-			// print to screen the new balance
-			printNewBalance(balance, amount);
-			
-			// reset global balance
-			if (account === 'savings') { savingsBalance = balance; } 
-			if (account === 'checking') { checkingBalance = balance; }
-		}
+function withdrawAccount(account) {
+	if (account === 'savings') {
+		var balance = savingsBalance;
+		var input = Number(savingsInput.value);
+		var container = savingsContainer;
+		var amount = savingsAmount;
 	}
 
+	if (account === 'checking') {
+		var balance = checkingBalance;
+		var input = Number(checkingInput.value);
+		var container = checkingContainer;
+		var amount = checkingAmount;		
+	}
 
+	if (checkNumber.test(input)) {
+		// cannot withdraw more than both accounts combined
+		if (input <= (savingsBalance + checkingBalance)) {
+			if (input > balance) {
+				// overdraft
+				var remaining = input - balance;
+				balance = 0;
+				if (account === 'savings') {
+					// subtract from other account and update display
+					checkingBalance -= remaining;
+					changeAccountBackground(checkingBalance, checkingContainer);
+					printNewBalance(checkingBalance, checkingAmount);
+				}
+
+				if (account === 'checking') {
+					savingsBalance -= remaining;
+					changeAccountBackground(savingsBalance, savingsContainer);
+					printNewBalance(savingsBalance, savingsAmount);
+				}
+			} else {
+				// standard withdraw
+				balance -= input;
+			}
+		}
+		if (account === 'savings') { savingsBalance = balance; } 
+		if (account === 'checking') { checkingBalance = balance; }
+		changeAccountBackground(balance, container);
+		printNewBalance(balance, amount);
+	}
 }
 
 function changeAccountBackground(balance, container) {
