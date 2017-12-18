@@ -21,7 +21,7 @@ print "Enter filename: "
 filename = gets.chomp
 
 if FileTest.exists?(filename)
-	code_file_array = File.readlines(filename)
+	code_file_array = IO.readlines(filename)
 	total_lines = code_file_array.length
 
 	puts "#{total_lines} line(s)"

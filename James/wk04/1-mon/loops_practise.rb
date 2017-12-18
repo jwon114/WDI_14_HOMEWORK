@@ -19,8 +19,7 @@ computer_pick = rand(max_value.to_i) + 1
 while notWon do
 
 	puts "Pick a number between 0 and #{max_value}"
-	user_input = gets
-	user_input = user_input.to_i
+	user_input = gets.to_i
 
 	if user_input == computer_pick
 		puts "Congrats, you guessed correctly"
