@@ -29,6 +29,7 @@ def crappy_calculator
 		puts "Enter arguments in the format {arg1} {operator} {arg2} to calculate, list of operations (+,-,*,/)"
 		puts "for exponents enter: {arg1} exp {arg2}, e.g. 2 exp 3 = 8"
 		puts "for square root enter: {arg1} sqrt, e.g. 9 sqrt = 3"
+		puts "type 'exit' to quit"
 		input = gets.chomp
 
 		if input.downcase == "exit"
