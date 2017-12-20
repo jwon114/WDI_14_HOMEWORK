@@ -26,7 +26,9 @@ def crappy_calculator
 
 	calculating = true
 	while calculating do
-		puts "Enter arguments in the format {arg1} {operator} {arg2} to calculate"
+		puts "Enter arguments in the format {arg1} {operator} {arg2} to calculate, list of operations (+,-,*,/)"
+		puts "for exponents enter: {arg1} exp {arg2}, e.g. 2 exp 3 = 8"
+		puts "for square root enter: {arg1} sqrt, e.g. 9 sqrt = 3"
 		input = gets.chomp
 
 		if input.downcase == "exit"
@@ -35,21 +37,27 @@ def crappy_calculator
 			next
 		end
 
+		# replace all white space and split string by group of numbers
 		input_array = input.gsub(/\s+/, "").split(/(\d+)/)
+		# shift to remove initial empty string in array after split
 		input_array.shift
-		# binding.pry
 		valid_input = true
+
 		until input_array.length == 1 do
 			arg1 = input_array[0]
 			operator = input_array[1]
-			arg2 = input_array[2]
+			
+			if operator == "sqrt"
+				arg2 = "0"
+			else 
+				arg2 = input_array[2]
+			end
 
 			if !/\d+/.match(arg1) || !/\d+/.match(arg2) || !operators.include?(operator)
 				valid_input = false
 				break
 			end
 			
-
 			case operator
 			when "+"
 				result = arg1.to_i + arg2.to_i
@@ -69,12 +77,13 @@ def crappy_calculator
 			input_array.shift(3)
 			input_array.unshift(result.to_s)
 		end
-			# binding.pry
 
 		if valid_input
-			puts result
+			puts "= #{result}"
+			puts
 		else
 			puts "Invalid input"
+			puts
 		end
 	end
 end
