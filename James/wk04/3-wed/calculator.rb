@@ -38,8 +38,16 @@ def crappy_calculator
 			next
 		end
 
-		# replace all white space and split string by group of numbers
-		input_array = input.gsub(/\s+/, "").split(/(\d+)/)
+		# replace all white space and split string by group of numbers, determine if input is float
+		is_float = false
+		input_array = input.gsub(/\s+/, "")
+		if input_array.include?(".")
+			input_array = input_array.split(/(\d+\.\d+)/)
+			is_float = true
+		else
+			input_array = input_array.split(/(\d+)/)
+		end
+
 		# shift to remove initial empty string in array after split
 		input_array.shift
 		valid_input = true
@@ -54,24 +62,33 @@ def crappy_calculator
 				arg2 = input_array[2]
 			end
 
-			if !/\d+/.match(arg1) || !/\d+/.match(arg2) || !operators.include?(operator)
+
+			if !/(\d+)|(\d+\.\d+)/.match(arg1) || !/(\d+)|(\d+\.\d+)/.match(arg2) || !operators.include?(operator)
 				valid_input = false
 				break
+			end
+
+			if is_float
+				arg1 = arg1.to_f
+				arg2 = arg2.to_f
+			else 
+				arg1 = arg1.to_i
+				arg2 = arg2.to_i
 			end
 			
 			case operator
 			when "+"
-				result = arg1.to_i + arg2.to_i
+				result = arg1 + arg2
 			when "-"
-				result = arg1.to_i - arg2.to_i
+				result = arg1 - arg2
 			when "*"
-				result = arg1.to_i * arg2.to_i
+				result = arg1 * arg2
 			when "/"
-				result = arg1.to_i / arg2.to_i
+				result = arg1 / arg2
 			when "exp"
-				result = arg1.to_i ** arg2.to_i
+				result = arg1 ** arg2
 			when "sqrt"
-				result = Math.sqrt(arg1.to_i)
+				result = Math.sqrt(arg1)
 			else
 				result = 0
 			end
