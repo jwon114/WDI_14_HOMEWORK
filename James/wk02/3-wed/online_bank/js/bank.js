@@ -20,6 +20,9 @@ var input;
 var container;
 var amount;
 
+// Could do a function that creates objects of accounts with properties????
+// Object with balance, and methods withdraw and deposit
+
 // regex for any number or decimal
 var checkNumber = /(^[0-9]*$)|([0-9]*\.[0-9]*$)/;
 
