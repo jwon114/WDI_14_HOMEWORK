@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Stocks</title>
+	<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+	<nav>
+		<a href="/about">About</a>
+	</nav>
+	<h1><%= @stock_name %></h1>
+	<div class="stock_details">
+		<div class="stock_price">
+			<div>Stock Price: <%= @stock_price %></div>
+			<div>Change: <%= @stock_change %></div>
+			<div>Year High: <%= @stock_price_52_high %></div>
+			<div>Year Low: <%= @stock_price_52_low %></div>
+		</div>
+		<div class="stock_summary"><%= @summary %></div>
+	</div>
+</body>
+</html>

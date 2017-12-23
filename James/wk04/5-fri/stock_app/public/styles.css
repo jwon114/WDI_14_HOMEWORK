@@ -1,0 +1,45 @@
+body {
+	background-color: mistyrose;
+	font-family: "Arial", sans-serif;
+	width: 80%;
+	margin: 0 auto;
+}
+
+nav {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}
+
+nav a {
+	color: inherit;
+}
+
+h1 {
+	text-align: center;
+	font-size: 50px;
+}
+
+.stock_details {
+	margin: 0 auto;
+	margin-top: 40px;
+}
+
+.stock_price {
+	display: flex;
+	justify-content: space-around;
+	font-size: 30px;
+	border: 2px solid black;
+	box-shadow: 2px 2px 0 1px black;
+}
+
+.stock_summary {
+	margin-top: 50px;
+	text-align: justify;
+	line-height: 30px;
+}
+
+.rip {
+	font-size: 70px;
+	text-align: center;
+}
