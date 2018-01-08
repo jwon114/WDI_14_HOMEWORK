@@ -10,17 +10,18 @@
 					<li><%= @movie_data["Runtime"] %></li>
 					<li><%= @movie_data["Genre"] %></li>
 					<li><%= @movie_data["Released"] %></li>
+					<li><%= @movie_data["Language"] %></li>
 				</ul>
 			</div>
 		</div>
-		<p>Director: <%= @movie_data["Director"] %></p>
+		<p class="director">Director: <%= @movie_data["Director"] %></p>
 		<p>Starring: <%= @movie_data["Actors"] %></p>
 		<p class="plot"><%= @movie_data["Plot"] %></p>
 		<ul class="ratings_container">
 			<% @movie_ratings.each do |rating| %>
 				<li class="ratings">
 					<%= rating[:image] %>
-					<%= rating[:value] %>
+					<span class="ratings_value"><%= rating[:value] %></span>
 				</li>
 			<% end %>
 		</ul>

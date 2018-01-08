@@ -6,18 +6,6 @@ html {
 	box-sizing: inherit;
 }
 
-.background {
-	position: absolute;
-	top: 0;
-	left: 0;
-	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 255, 255, 0.45)), url("../images/movie_search_background.jpg") no-repeat center center fixed;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 100%;
-	width: 100%;
-}
-
 h1, h2, p {
 	margin: 0;
 	padding: 15px 15px;
@@ -35,6 +23,18 @@ h1, h2 {
 p {
 	font-size: 20px;
 	text-align: justify;
+}
+
+.background {
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 255, 255, 0.45)), url("../images/movie_search_background.jpg") no-repeat center center fixed;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
 }
 
 .search {
@@ -75,7 +75,6 @@ p {
 }
 
 .year_rating_runtime ul {
-	/*padding: 0 15px;*/
 	padding: 0;
 	display: flex;
 	justify-content: flex-start;
@@ -108,6 +107,14 @@ p {
 	/*height: 445px;*/
 }
 
+.movie_details .director {
+	padding-bottom: 0;
+}
+
+.movie_details .plot {
+	font-weight: 300;
+}
+
 .ratings_container {
 	list-style: none;
 	padding: 0;
@@ -121,8 +128,23 @@ p {
 	align-items: center;
 }
 
-.ratings .ratings_icon
-{
+.ratings .ratings_icon {
 	height: 75px;
 }
+
+.ratings .ratings_value {
+	margin-top: 10px;
+}
+
+.fa-imdb + .ratings_value {
+	margin-top: 7px;
+}
+
+.fa-star {
+	color: yellow;
+	margin-right: 5px;
+	-webkit-text-stroke: 1px orange;
+}
+
+
 
