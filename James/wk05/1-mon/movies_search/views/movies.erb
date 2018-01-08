@@ -1,0 +1,36 @@
+<div class="movie">
+	<img src="<%= @poster %>" alt="">
+	<div class="movie_details">
+		<h1><%= @movie_title %></h1>
+		<div class="year_rating">
+			<h2>Year <%= @year %></h2>
+			<h2>Rating <%= @rated %></h2>
+			<h2>Released <%= @released %></h2>
+		</div>
+		<p>Runtime <%= @runtime %></p>
+		<p>Starring: <%= @actors%></p>
+		<p class="plot"><%= @plot %></p>
+		<ul class="ratings_container">
+			<% @ratings.each do |rating| %>
+				<li class="ratings">
+					<% if rating["Source"] == "Internet Movie Database" %>
+						<i class="fa fa-imdb fa-5x"></i>
+					<% end %>
+
+					<% if rating["Source"] == "Rotten Tomatoes" %>
+						<% if rating["Value"].gsub("%", "").to_i >= 60 %>
+							<img class="ratings_icon" src="../images/fresh.png" alt="">
+						<% else %>
+							<img class="ratings_icon" src="../images/rotten.png" alt="">
+						<% end %>
+					<% end %>
+
+					<% if rating["Source"] == "Metacritic" %>
+						<img class="ratings_icon" src="../images/Metacritic.png" alt="">
+					<% end %>
+					<span><%= rating["Value"] %></span>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+</div>
