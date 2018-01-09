@@ -37,9 +37,28 @@ p {
 	width: 100%;
 }
 
-.search {
+.movie_index {
 	display: flex;
 	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+.movie_index h1, .error_code {
+	font-size: 50px;
+	color: white;
+	font-weight: 400;
+}
+
+.movie_index h2 {
+	color: white;
+}
+
+.search {
+	display: flex;
+	position: fixed;
+	top: 12%;
+	left: 35%;
 }
 
 .search input, .search button {
