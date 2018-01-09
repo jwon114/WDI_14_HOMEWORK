@@ -1,3 +1,7 @@
+/***********/
+/* GENERAL */
+/***********/
+
 html {
 	box-sizing: border-box;
 }
@@ -29,13 +33,17 @@ p {
 	position: absolute;
 	top: 0;
 	left: 0;
-	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 255, 255, 0.45)), url("../images/movie_search_background.jpg") no-repeat center center fixed;
+	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 255, 255, 0.45)), url("../images/movie_search_background.jpg") no-repeat center center fixed;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	height: 100%;
 	width: 100%;
 }
+
+/*********/
+/* INDEX */
+/*********/
 
 .movie_index {
 	display: flex;
@@ -54,6 +62,10 @@ p {
 	color: white;
 }
 
+/**********/
+/* SEARCH */
+/**********/
+
 .search {
 	display: flex;
 	position: fixed;
@@ -64,6 +76,55 @@ p {
 .search input, .search button {
 	font-size: 40px;
 }
+
+/*****************/
+/* MOVIE LISTING */
+/*****************/
+
+.movie_listing {
+	list-style: none;
+	padding: 0 50px;
+	display: flex;
+	margin-top: 150px;
+	overflow-x: scroll;
+}
+
+.movie_listing li {
+	margin-right: 50px;
+}
+
+.movie_listing li:last-child {
+	margin-right: 0;
+}
+
+.movie_listing_details {
+	margin-top: 20px;
+	text-align: center;
+}
+
+.movie_listing_item {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	/*border: 2px solid black;*/
+	text-decoration: none;
+}
+
+.movie_listing_details > .title {
+	display: inline-block;
+	padding: 0;
+	color: white;
+}
+
+.movie_listing_details > .year {
+	display: inline-block;
+	padding: 0;
+	color: black;
+}
+
+/*********/
+/* MOVIE */
+/*********/
 
 .movie {
 	display: flex;

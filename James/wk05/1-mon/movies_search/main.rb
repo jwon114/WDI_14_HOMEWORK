@@ -1,18 +1,31 @@
 require 'sinatra'
 require 'sinatra/reloader'
 require 'httparty'
+require 'pry'
 
 get '/' do
   	erb :index
 end
 
-get '/movies' do
-	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&t=#{params[:movie]}")
+get '/movie_listing' do
+	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:movie]}")
+	
+	if result["Response"] == "False"
+		@error = result["Error"]
+	elsif result["Response"] == "True"
+		@movie_listing_data = result["Search"]
+	end
+
+	erb :movie_listing
+end
+
+get '/movie' do
+	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}")
 
 	if result["Response"] == "False"
 		@error = result["Error"]
 	elsif result["Response"] == "True"
- 		@movie_data = result
+		@movie_data = result
 		@movie_ratings = []
 		result["Ratings"].each do |rating|
 			case rating["Source"]
@@ -34,9 +47,9 @@ get '/movies' do
 
 			@movie_ratings << { :image => ratings_image, :value => ratings_value }
 		end
-
 	end
-	erb :movies
+
+	erb :movie
 end
 
 
