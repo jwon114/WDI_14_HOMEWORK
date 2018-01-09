@@ -1,17 +1,19 @@
 <% if @error %>
 	<h1 class="error_code"><%= @error %></h1>
 <% else %>
-	<ul class="movie_listing">
-		<% @movie_listing_data.each do |movie| %>
-			<li>
-				<a class="movie_listing_item" href="/movie?id=<%= movie['imdbID'] %>">
-					<img src="<%= movie["Poster"] %>" alt="">
-					<div class="movie_listing_details">
-						<p class="title"><%= movie["Title"] %></p>
-						<p class="year">(<%= movie["Year"] %>)</p>
-					</div>
-				</a>
-			</li>
-		<% end %>
-	</ul>
+	<div class="movie_listing_container">
+		<ul class="movie_listing">
+			<% @movie_listing_data.each do |movie| %>
+				<li>
+					<a class="movie_listing_item" href="/movie?id=<%= movie['imdbID'] %>">
+						<img src="<%= movie["Poster"] %>" alt="">
+						<div class="movie_listing_details">
+							<p class="title"><%= movie["Title"] %></p>
+							<p class="year">(<%= movie["Year"] %>)</p>
+						</div>
+					</a>
+				</li>
+			<% end %>
+		</ul>
+	</div>
 <% end %>

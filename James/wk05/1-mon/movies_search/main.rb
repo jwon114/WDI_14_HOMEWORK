@@ -8,12 +8,26 @@ get '/' do
 end
 
 get '/movie_listing' do
+
+	# 1. redirect after search to avoid refreshing the page and writing to the file again. Redirec to a saved location
+	# 2. history page show searches
+	# 3. create links from search history
+
+	history = File.open("history.txt", "a")
+	history.puts(params[:movie])
+	history.close
+
 	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:movie]}")
 	
 	if result["Response"] == "False"
 		@error = result["Error"]
 	elsif result["Response"] == "True"
-		@movie_listing_data = result["Search"]
+		# check totalResults count to see if there is only one result. redirect to
+		if result["totalResults"] == "1"
+			redirect to("/movie?id=#{result['Search'][0]['imdbID']}")
+		else
+			@movie_listing_data = result["Search"]
+		end
 	end
 
 	erb :movie_listing
@@ -50,6 +64,15 @@ get '/movie' do
 	end
 
 	erb :movie
+end
+
+get '/history' do
+	# link back to search from search history
+
+	history = File.readlines("history.txt", )
+	@search_history = history.reverse.uniq.first(10)
+
+	erb :history
 end
 
 

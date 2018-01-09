@@ -8,10 +8,13 @@
 </head>
 <body>
 	<div class="background">
-		<form class="search" action="/movie_listing">
-			<input type="text" placeholder="Movie Title" name="movie">
-			<button class="fa fa-search"></button>
-		</form>
+		<header>
+			<a class="layout_search_history" href="/history">Search History</a>
+			<form class="layout_search" action="/movie_listing">
+				<input type="text" placeholder="Movie Title" name="movie">
+				<button class="fa fa-search"></button>
+			</form>
+		</header>
 		
   		<%= yield %>
 	</div>
