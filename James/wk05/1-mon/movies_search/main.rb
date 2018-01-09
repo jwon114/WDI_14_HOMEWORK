@@ -70,7 +70,8 @@ get '/history' do
 	# link back to search from search history
 
 	history = File.readlines("history.txt", )
-	@search_history = history.reverse.uniq.first(10)
+	history_filtered = history.reject { |e| e.empty? or e == "\n" }
+	@search_history = history_filtered.reverse.uniq.first(10)
 
 	erb :history
 end

@@ -38,8 +38,9 @@ p {
 	top: 0;
 	left: 0;
 	background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 255, 255, 0.45)), url("../images/movie_search_background.jpg") no-repeat center center fixed;
-	height: 100%;
+	/*height: 100%;*/
 	width: 100%;
+	min-height: 100%
 }
 
 /*********/
@@ -48,41 +49,61 @@ p {
 
 .movie_index {
 	display: flex;
-	justify-content: center;
 	align-items: center;
 	flex-direction: column;
 }
 
 .movie_index h1, .error_code {
-	font-size: 50px;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	margin-top: 10%;
+	font-size: 60px;
 	color: white;
 	font-weight: 400;
 }
 
 .movie_index h2 {
 	color: white;
+	font-size: 40px;
 }
 
-/**********/
-/* SEARCH */
-/**********/
+/*******/
+/* NAV */
+/*******/
 
 header {
 	position: relative;
-	top: 5%;
+	margin-top: 2%;
 	width: 100%;
-	border: 1px solid white;
+	/*border: 1px solid white;*/
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.layout_search_history {
+nav {
+	position: absolute;
+	left: 3%;
+}
+
+nav ul {
+	list-style: none;
+	padding: 0;
+	display: flex;
+}
+
+nav ul li {
+	margin-right: 40px;
+}
+
+nav ul li:last-child {
+	margin-right: 0;
+}
+
+nav ul li a {
 	color: white;
 	text-decoration: none;
-	position: absolute;
-	/*top: 5%;*/
-	left: 3%;
 	font-size: 24px;
 }
 
@@ -102,8 +123,7 @@ header {
 .movie_listing_container {
 	margin-left: 2.5%;
 	margin-right: 2.5%;
-	position: relative;
-	top: 10%;
+	margin-top: 5%;
 }
 
 .movie_listing {
@@ -156,23 +176,24 @@ header {
 /*********/
 
 .movie_container {
-/*	display: flex;
-	align-items: center;
-	height: 100%;*/
-	margin-top: 10%;
+	margin-top: 8%;
 }
 
 .movie {
 	display: flex;
 	width: 70%;
 	margin: 0 auto;
-	/*margin-top: 80px;*/
 	/*border: 1px solid black;*/
 	box-shadow: 0 0 2px 2px #808080;
 }
 
+.movie_poster {
+	border-right: 2px solid #999999;
+}
+
 .movie_details_header {
 	background-color: #262626;
+	border-bottom: 2px solid #999999;
 }
 
 .movie_details_header > h1 {
@@ -183,6 +204,11 @@ header {
 
 .movie_details_header h2 {
 	color: #999999;
+}
+
+.movie_details_header > h2 {
+	display: inline-block;
+	padding: 0 15px;
 }
 
 .year_rating_runtime ul {
@@ -201,11 +227,6 @@ header {
 
 .year_rating_runtime li:last-child {
 	border-right: none;
-}
-
-.movie_details_header > h2 {
-	display: inline-block;
-	padding: 0;
 }
 
 .movie_details {
@@ -263,7 +284,7 @@ header {
 .search_history_container {
 	display: flex;
 	justify-content: center;
-	margin-top: 5%;
+	margin-top: 2%;
 }
 
 .search_history {
@@ -276,7 +297,7 @@ header {
 .search_history h1 {
 	color: whitesmoke;
 	font-weight: 400;
-	font-size: 50px;
+	font-size: 40px;
 }
 
 .history_list {
@@ -284,6 +305,7 @@ header {
 	padding: 0;
 	text-align: center;
 	width: 80%;
+	margin: 0;
 }
 
 .history_list li {
