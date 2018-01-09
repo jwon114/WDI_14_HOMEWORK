@@ -315,7 +315,7 @@ nav ul li a {
 	background-color: darkgrey;
 }
 
-.history_list li:hover {
+.history_list li:hover a {
 	color: mistyrose;
 }
 
