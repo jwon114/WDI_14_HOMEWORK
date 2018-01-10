@@ -3,6 +3,8 @@ require 'sinatra/reloader'
 require 'httparty'
 require 'pry'
 
+prev_path = ""
+
 get '/' do
   	erb :index
 end
@@ -29,6 +31,8 @@ get '/movie_listing' do
 			@movie_listing_data = result["Search"]
 		end
 	end
+
+	prev_path = request.fullpath
 
 	erb :movie_listing
 end
@@ -70,10 +74,14 @@ get '/history' do
 	# link back to search from search history
 
 	history = File.readlines("history.txt", )
-	history_filtered = history.reject { |e| e.empty? or e == "\n" }
+	history_filtered = history.reject { |e| e.empty? || e == "\n" }
 	@search_history = history_filtered.reverse.uniq.first(10)
 
 	erb :history
+end
+
+get '/back' do
+	redirect to(prev_path)
 end
 
 
