@@ -6,6 +6,8 @@ require 'pry'
 prev_path = ""
 
 get '/' do
+	prev_path = request.fullpath
+
   	erb :index
 end
 
@@ -15,15 +17,18 @@ get '/movie_listing' do
 	# 2. history page show searches
 	# 3. create links from search history
 
-	history = File.open("history.txt", "a")
-	history.puts(params[:movie])
-	history.close
+	# history = File.open("history.txt", "a")
+	# history.puts(params[:movie])
+	# history.close
 
 	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:movie]}")
 	
 	if result["Response"] == "False"
 		@error = result["Error"]
 	elsif result["Response"] == "True"
+		history = File.open("history.txt", "a")
+		history.puts(params[:movie])
+		history.close
 		# check totalResults count to see if there is only one result. redirect to
 		if result["totalResults"] == "1"
 			redirect to("/movie?id=#{result['Search'][0]['imdbID']}")

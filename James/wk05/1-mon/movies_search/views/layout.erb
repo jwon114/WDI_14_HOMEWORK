@@ -2,30 +2,39 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Hello World</title>
+	<title>Movie Search</title>
+	<link rel="stylesheet" href="../bootstrap-4.0.0-beta.3-dist/css/bootstrap.min.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel='stylesheet' href='/stylesheets/main.css'>
+	<link rel='stylesheet' href='/stylesheets/styles.css'>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="../bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="background">
-		<header>
-			<nav>
-				<ul>
-					<li><a href="/">Home</a></li>
-					<li>
-						<% if request.path_info == "/" || request.path_info == "/movie_listing" %>
-							<a class="layout_search_history" href="/history">Search History</a>
-						<% elsif request.path_info == "/history" || request.path_info == "/movie" %>
-							<a href="/back">Back</a>
-						<% end %>
-					</li>
-				</ul>
+		<!-- <header> -->
+			<nav class="navbar navbar-expand-md navbar-light bg-dark fixed-top">
+				<button class="navbar-toggler navbar-toggler-right" data-toggle="collapse" type="button" data-target="#navbar">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbar">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+						<li class="nav-item">
+							<% if request.path_info == "/" || request.path_info == "/movie_listing" %>
+								<a class="layout_search_history nav-link" href="/history">Search History</a>
+							<% elsif request.path_info == "/history" || request.path_info == "/movie" %>
+								<a class="nav-link" href="/back">Back</a>
+							<% end %>
+						</li>
+					</ul>
+				</div>
+				<form class="navbar-form search" action="/movie_listing">
+					<input type="text" placeholder="Movie Title" name="movie">
+					<button class="fa fa-search"></button>
+				</form>
 			</nav>
-			<form class="layout_search" action="/movie_listing">
-				<input type="text" placeholder="Movie Title" name="movie">
-				<button class="fa fa-search"></button>
-			</form>
-		</header>
+
+		<!-- </header> -->
 		
   		<%= yield %>
 	</div>
