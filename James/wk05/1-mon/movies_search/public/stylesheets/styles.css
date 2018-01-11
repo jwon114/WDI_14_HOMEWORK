@@ -104,6 +104,12 @@ p {
 	font-size: 40px;
 }
 
+.search_index {
+	display: flex;
+	font-size: 40px;
+	justify-content: center;
+}
+
 /*******/
 /* NAV */
 /*******/

@@ -3,10 +3,7 @@ require 'sinatra/reloader'
 require 'httparty'
 require 'pry'
 
-prev_path = ""
-
 get '/' do
-	prev_path = request.fullpath
 
   	erb :index
 end
@@ -36,8 +33,6 @@ get '/movie_listing' do
 			@movie_listing_data = result["Search"]
 		end
 	end
-
-	prev_path = request.fullpath
 
 	erb :movie_listing
 end
@@ -85,9 +80,6 @@ get '/history' do
 	erb :history
 end
 
-get '/back' do
-	redirect to(prev_path)
-end
 
 
 
