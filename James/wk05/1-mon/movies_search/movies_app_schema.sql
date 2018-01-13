@@ -18,7 +18,7 @@ CREATE TABLE movies (
 	director VARCHAR(300),
 	actors VARCHAR(300),
 	plot VARCHAR(600),
-	ratings VARCHAR(600),
+	ratings JSON,
 	poster VARCHAR(600),
 	imdb_id VARCHAR(300)
 );

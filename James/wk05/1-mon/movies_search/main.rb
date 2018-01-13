@@ -14,10 +14,6 @@ end
 
 get '/movie_listing' do
 
-	# 1. redirect after search to avoid refreshing the page and writing to the file again. Redirec to a saved location
-	# 2. history page show searches
-	# 3. create links from search history
-
 	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:movie]}")
 	
 	if result["Response"] == "False"
@@ -44,8 +40,8 @@ get '/movie' do
 	if movie_result
 		puts 'got movie from local database'
 		@movie_data = movie_result
-		# replace hash rockets with colons to transform into JSON object
-		ratings = JSON.parse movie_result.ratings.gsub("=>", ":")
+		# movie_results query returns the ratings JSON as a string. Need to parse back into JSON to loop through it
+		ratings = JSON.parse movie_result.ratings
 		@movie_ratings = build_ratings_images(ratings)
 	else
 		result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}")
@@ -53,11 +49,12 @@ get '/movie' do
 			@error = result["Error"]
 		elsif result["Response"] == "True"
 			# issue with getting new request, the movies.erb is mapped to the database instance variable not the http, need to consolidate into one object to send
-			puts 'sending new request to add movie'
+			puts 'adding movie to local database'
 			add_movie(result)
 			movie_result = Movie.where(imdb_id: params[:id]).first
 			@movie_data = movie_result
-			ratings = JSON.parse movie_result.ratings.gsub("=>", ":")
+			# movie_results query returns the ratings JSON as a string. Need to parse back into JSON to loop through it
+			ratings =  JSON.parse movie_result.ratings
 			@movie_ratings = build_ratings_images(ratings)
 		end
 	end
@@ -88,10 +85,6 @@ get '/history' do
 	erb :history
 end
 
-def build_movie_data(data)
-
-end
-
 def add_movie(movie)
 	movie_info = {
 		title: movie["Title"],
@@ -104,7 +97,7 @@ def add_movie(movie)
 		director: movie["Director"],
 		actors: movie["Actors"],
 		plot: movie["Plot"],
-		ratings: movie["Ratings"],
+		ratings: (JSON.generate movie["Ratings"]), # need to generate JSON because ruby parses into a hash with hash rockets
 		poster: movie["Poster"],
 		imdb_id: movie["imdbID"]
 	}
