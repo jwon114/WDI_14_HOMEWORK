@@ -43,6 +43,7 @@ get '/movie' do
 		# movie_results query returns the ratings JSON as a string. Need to parse back into JSON to loop through it
 		ratings = JSON.parse movie_result.ratings
 		@movie_ratings = build_ratings_images(ratings)
+		@seasons = movie_result.total_seasons
 	else
 		result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}")
 		if result["Response"] == "False"
@@ -56,7 +57,7 @@ get '/movie' do
 			# movie_results query returns the ratings JSON as a string. Need to parse back into JSON to loop through it
 			ratings =  JSON.parse movie_result.ratings
 			@movie_ratings = build_ratings_images(ratings)
-			@seasons = movie_result.total
+			@seasons = movie_result.total_seasons
 		end
 	end
 

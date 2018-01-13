@@ -51,18 +51,17 @@
 		width: 100%;
 	}
 
-	.movie_container {
-		margin-top: 75px;
-		margin-bottom: 25px;
-	}
-
 	/*********/
 	/* MOVIE */
 	/*********/
 
+	.movie_container {
+		margin: 75px auto 25px;
+		width: 85%;
+	}
+
 	.movie {
 		flex-direction: column;
-		width: 85%;
 	}
 
 	.movie_details p {
@@ -150,11 +149,8 @@
 	/*********/
 
 	.movie_container {
-		margin-top: 150px;
-	}
-
-	.movie {
 		width: 70%;
+		margin: 150px auto 0;
 	}
 
 	.movie_poster {
@@ -357,11 +353,12 @@ nav ul li a {
 /* MOVIE */
 /*********/
 
+.movie_container {
+	box-shadow: 0 0 2px 2px #808080;
+}
+
 .movie {
 	display: flex;
-	margin: 0 auto;
-	/*border: 1px solid black;*/
-	box-shadow: 0 0 2px 2px #808080;
 }
 
 .movie_details_header {
@@ -405,12 +402,10 @@ nav ul li a {
 }
 
 .movie_details {
-	/*border: 1px solid black;*/
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: white;
-	/*width: 100%;*/
 }
 
 .movie_details .director {
@@ -451,6 +446,20 @@ nav ul li a {
 	color: yellow;
 	margin-right: 5px;
 	-webkit-text-stroke: 1px orange;
+}
+
+.seasons_list {
+	background-color: mistyrose;
+}
+
+.seasons_list ul {
+	display: flex;
+	justify-content: space-around;
+	list-style: none;
+}
+
+.seasons_list ul li a {
+	color: black;
 }
 
 /***********/
