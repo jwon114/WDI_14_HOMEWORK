@@ -85,6 +85,9 @@ get '/history' do
 	erb :history
 end
 
+# search a tv series by checking the type="series", totalSeasons will give number or seasons, if type is series then display 
+# buttons on series page to jump to the season, within season list the episodes
+
 def add_movie(movie)
 	movie_info = {
 		title: movie["Title"],
