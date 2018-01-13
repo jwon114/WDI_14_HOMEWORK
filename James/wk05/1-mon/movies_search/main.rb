@@ -56,6 +56,7 @@ get '/movie' do
 			# movie_results query returns the ratings JSON as a string. Need to parse back into JSON to loop through it
 			ratings =  JSON.parse movie_result.ratings
 			@movie_ratings = build_ratings_images(ratings)
+			@seasons = movie_result.total
 		end
 	end
 
@@ -87,23 +88,30 @@ end
 
 # search a tv series by checking the type="series", totalSeasons will give number or seasons, if type is series then display 
 # buttons on series page to jump to the season, within season list the episodes
+# use the gem will_paginate for pagination
 
 def add_movie(movie)
+
 	movie_info = {
 		title: movie["Title"],
 		year: movie["Year"],
 		rated: movie["Rated"],
-		genre: movie["Genre"],
 		released: movie["Released"],
 		runtime: movie["Runtime"],
-		language: movie["Language"],
+		genre: movie["Genre"],
 		director: movie["Director"],
 		actors: movie["Actors"],
 		plot: movie["Plot"],
-		ratings: (JSON.generate movie["Ratings"]), # need to generate JSON because ruby parses into a hash with hash rockets
+		language: movie["Language"],
 		poster: movie["Poster"],
-		imdb_id: movie["imdbID"]
+		ratings: (JSON.generate movie["Ratings"]), # need to generate JSON because ruby parses into a hash with hash rockets
+		imdb_id: movie["imdbID"],
+		movie_type: movie["Type"]
 	}
+
+	if movie["Type"] == "series"
+		movie_info[:total_seasons] = movie["totalSeasons"]
+	end
 
 	new_movie = Movie.create(movie_info)
 end
