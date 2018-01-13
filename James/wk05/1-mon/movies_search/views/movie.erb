@@ -1,23 +1,23 @@
 <div class="movie_container">
 	<div class="movie">
-		<img class="movie_poster" src="<%= @movie_data["Poster"] %>" alt="">
+		<img class="movie_poster" src="<%= @movie_data.poster %>" alt="">
 		<div class="movie_details">
 			<div class="movie_details_header">
-				<h1><%= @movie_data["Title"] %></h1>
-				<h2><%= "(" + @movie_data["Year"] + ")" %></h2>
+				<h1><%= @movie_data.title %></h1>
+				<h2><%= "(" + @movie_data.year + ")" %></h2>
 				<div class="year_rating_runtime">
 					<ul>
-						<li><%= @movie_data["Rated"] %></li>
-						<li><%= @movie_data["Runtime"] %></li>
-						<li><%= @movie_data["Genre"] %></li>
-						<li><%= @movie_data["Released"] %></li>
-						<li><%= @movie_data["Language"] %></li>
+						<li><%= @movie_data.rated %></li>
+						<li><%= @movie_data.runtime %></li>
+						<li><%= @movie_data.genre %></li>
+						<li><%= @movie_data.released %></li>
+						<li><%= @movie_data.language %></li>
 					</ul>
 				</div>
 			</div>
-			<p class="director">Director: <%= @movie_data["Director"] %></p>
-			<p>Starring: <%= @movie_data["Actors"] %></p>
-			<p class="plot"><%= @movie_data["Plot"] %></p>
+			<p class="director">Director: <%= @movie_data.director %></p>
+			<p>Starring: <%= @movie_data.actors %></p>
+			<p class="plot"><%= @movie_data.plot %></p>
 			<ul class="ratings_container">
 				<% @movie_ratings.each do |rating| %>
 					<li class="ratings">
