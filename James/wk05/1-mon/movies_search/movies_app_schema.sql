@@ -25,21 +25,13 @@ CREATE TABLE movies (
 	total_seasons VARCHAR(100)
 );
 
-CREATE TABLE tv_series_episodes (
+CREATE TABLE movie_season_episodes (
 	id SERIAL PRIMARY KEY,
 	title VARCHAR(300),
-	year VARCHAR(10),
-	rated VARCHAR(10),
 	released VARCHAR(300),
-	runtime VARCHAR(100),
-	genre VARCHAR(300),
-	director VARCHAR(300),
-	actors VARCHAR(300),
-	plot VARCHAR(600),
-	language VARCHAR(300),
-	poster VARCHAR(600),
-	ratings JSON,
+	episode VARCHAR(100),
+	imdb_rating VARCHAR(100),
 	imdb_id VARCHAR(300),
 	series_id VARCHAR(300),
-	movie_type VARCHAR(100)
+	season VARCHAR(100)
 );

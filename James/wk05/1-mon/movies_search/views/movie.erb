@@ -32,7 +32,7 @@
 		<div class="seasons_list">
 			<ul>
 				<% 1.upto(@seasons.to_i) do |season| %>
-					<li><a href="/">Season <%= season %></a></li>
+					<li><a href="/movie/<%= @movie_data.imdb_id %>/<%= season %>">Season <%= season %></a></li>
 				<% end %>
 			</ul>
 		</div>

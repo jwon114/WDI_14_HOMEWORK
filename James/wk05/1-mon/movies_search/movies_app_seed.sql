@@ -37,39 +37,38 @@ VALUES (
 	'movie',
 	null);
 
-INSERT INTO TV_SERIES_EPISODES (
+INSERT INTO MOVIE_SEASON_EPISODES (
 	title, 
-	year, 
-	rated, 
-	released, 
-	runtime, 
-	genre, 
-	director, 
-	actors, 
-	plot, 
-	language, 
-	poster, 
-	ratings, 
+	released,
+	episode,
+	imdb_rating,
 	imdb_id,
 	series_id,
-	movie_type) 
+	season) 
 VALUES (
 	'Winter Is Coming', 
-	'2011-', 
-	'TV-MA', 
-	'17 Apr 2011', 
-	'57 min',
-	'Adventure, Drama, Fantasy', 
-	'N/A', 
-	'Peter Dinklage, Lena Headey, Emilia Clarke, Kit Harington', 
-	'Nine noble families fight for control over the mythical lands of Westeros, while a forgotten race returns after being dormant for thousands of years.', 
-	'English', 
-	'https://images-na.ssl-images-amazon.com/images/M/MV5BMjE3NTQ1NDg1Ml5BMl5BanBnXkFtZTgwNzY2NDA0MjI@._V1_SX300.jpg', 
-	'[{"Source": "Internet Movie Database","Value": "9.5/10"}]', 
+	'2011-04-07',
+	'1',
+	'9.5', 
 	'tt1480055',
 	'tt0944947',
-	'episode');
+	'1');
 
-
+INSERT INTO MOVIE_SEASON_EPISODES (
+	title, 
+	released,
+	episode,
+	imdb_rating,
+	imdb_id,
+	series_id,
+	season) 
+VALUES (
+	'The Kingsroad', 
+	'2011-04-24',
+	'2',
+	'8.8', 
+	'tt1668746',
+	'tt0944947',
+	'1');
 
 

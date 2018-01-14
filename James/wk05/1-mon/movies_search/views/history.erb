@@ -4,7 +4,7 @@
 		<ul class="history_list">
 			<% if @search_history %>
 				<% @search_history.each do |item| %>
-					<li><a class="history_list_item" href="/movie_listing?movie=<%= item %>"><%= item %></a></li>
+					<li><a class="history_list_item" href="/movie_listing/<%= item %>"><%= item %></a></li>
 				<% end %>
 			<% end %>
 		</ul>

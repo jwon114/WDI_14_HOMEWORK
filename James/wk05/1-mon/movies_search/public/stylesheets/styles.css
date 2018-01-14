@@ -227,6 +227,14 @@ a:hover {
 	min-height: 100%
 }
 
+.error_code {
+	display: flex;
+	justify-content: center;
+	color: white;
+	font-weight: 400;
+	margin-top: 150px;
+}
+
 /*********/
 /* INDEX */
 /*********/
@@ -237,7 +245,7 @@ a:hover {
 	flex-direction: column;
 }
 
-.movie_index h1, .error_code {
+.movie_index h1 {
 	display: flex;
 	align-items: center;
 	flex-direction: column;

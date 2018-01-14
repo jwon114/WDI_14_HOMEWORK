@@ -5,7 +5,7 @@
 		<ul class="movie_listing">
 			<% @movie_listing_data.each do |movie| %>
 				<li>
-					<a class="movie_listing_item" href="/movie?id=<%= movie['imdbID'] %>">
+					<a class="movie_listing_item" href="/movie/<%= movie['imdbID'] %>">
 						<img src="<%= movie["Poster"] %>" alt="">
 						<div class="movie_listing_details">
 							<p class="title"><%= movie["Title"] %></p>

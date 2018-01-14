@@ -2,9 +2,11 @@ require 'sinatra'
 require 'sinatra/reloader'
 require 'httparty'
 require 'json'
+require 'uri'
 require_relative 'db_config'
 require_relative 'models/movie'
 require_relative 'models/search_history'
+require_relative 'models/movie_season_episode'
 require 'pry'
 
 get '/' do
@@ -12,20 +14,21 @@ get '/' do
   	erb :index
 end
 
-get '/movie_listing' do
+get '/movie_listing/:title' do
 
-	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:movie]}")
+	result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&s=#{params[:title]}")
 	
 	if result["Response"] == "False"
 		@error = result["Error"]
+		erb :error
 	elsif result["Response"] == "True"
-		history = SearchHistory.create(title: params[:movie])
+		history = SearchHistory.create(title: params[:title])
 		# history = File.open("history.txt", "a")
 		# history.puts(params[:movie])
 		# history.close
 		# check totalResults count to see if there is only one result. redirect to
 		if result["totalResults"] == "1"
-			redirect to("/movie?id=#{result['Search'][0]['imdbID']}")
+			redirect to("/movie/#{result['Search'][0]['imdbID']}")
 		else
 			@movie_listing_data = result["Search"]
 		end
@@ -34,9 +37,19 @@ get '/movie_listing' do
 	erb :movie_listing
 end
 
-get '/movie' do
+get '/movie_listing' do
+	if params[:title].empty?
+		@error = "No title searched"
+		erb :error
+	else 
+		redirect '/movie_listing/' + URI.encode(params[:title])
+	end
+end
+
+get '/movie/:id' do
 	# search for title in database, if present then retrieve, otherwise send http request and save to db
 	movie_result = Movie.where(imdb_id: params[:id]).first
+
 	if movie_result
 		puts 'got movie from local database'
 		@movie_data = movie_result
@@ -48,8 +61,8 @@ get '/movie' do
 		result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}")
 		if result["Response"] == "False"
 			@error = result["Error"]
+			erb :error
 		elsif result["Response"] == "True"
-			# issue with getting new request, the movies.erb is mapped to the database instance variable not the http, need to consolidate into one object to send
 			puts 'adding movie to local database'
 			add_movie(result)
 			movie_result = Movie.where(imdb_id: params[:id]).first
@@ -62,6 +75,28 @@ get '/movie' do
 	end
 
 	erb :movie
+end
+
+get '/movie/:id/:season' do
+	# episode_result = MovieSeasonEpisode.where(series_id: params[:id], season: params[:season]).order("episode")
+	
+	# if episode_result
+	# 	episode_result.each do |episode|
+
+	# 	end
+	# 	@episode_list = episode_result
+	# else 
+		episode_result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}&season=#{params[:season]}")
+		if episode_result["Response"] == "False"
+			@erorr = episode_result["Error"]
+			erb :error
+		elsif episode_result["Response"] == "True"
+			@episode_list = episode_result["Episodes"]
+		end
+
+	# end
+
+	erb :season_listing
 end
 
 get '/history' do
@@ -90,6 +125,10 @@ end
 # search a tv series by checking the type="series", totalSeasons will give number or seasons, if type is series then display 
 # buttons on series page to jump to the season, within season list the episodes
 # use the gem will_paginate for pagination
+
+def movie_listing_url
+
+end
 
 def add_movie(movie)
 
