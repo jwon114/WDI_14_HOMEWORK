@@ -414,6 +414,7 @@ nav ul li a {
 	flex-direction: column;
 	justify-content: space-between;
 	background-color: white;
+	flex-grow: 1;
 }
 
 .movie_details .director {
@@ -520,8 +521,23 @@ nav ul li a {
 	width: 100%;
 }
 
+/******************/
+/* SEASON LISTING */
+/******************/
 
+.season_listing_container {
+	margin-top: 100px;
+}
 
+.season_listing {
+	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.season_listing li {
+	width: 50%;
+}
 
 
 

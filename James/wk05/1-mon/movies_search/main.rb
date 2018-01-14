@@ -86,6 +86,7 @@ get '/movie/:id/:season' do
 	# 	end
 	# 	@episode_list = episode_result
 	# else 
+	# hard to store episode list because dont have logic to add episodes if they arent all in database
 		episode_result = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}&season=#{params[:season]}")
 		if episode_result["Response"] == "False"
 			@erorr = episode_result["Error"]

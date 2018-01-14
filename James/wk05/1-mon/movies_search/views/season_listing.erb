@@ -1,0 +1,14 @@
+<div class="season_listing_container">
+	<ul class="season_listing">
+		<% @episode_list.each do |episode| %>
+			<li>
+				<a href="/movie/<%= episode["imdbID"] %>">
+					<div>
+						<%= episode["Episode"]%>
+						<%= episode["Title"] %>
+					</div>
+				</a>
+			</li>
+		<% end %>
+	</ul>
+</div>
