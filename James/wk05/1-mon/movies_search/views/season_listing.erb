@@ -3,10 +3,8 @@
 		<% @episode_list.each do |episode| %>
 			<li>
 				<a href="/movie/<%= episode["imdbID"] %>">
-					<div>
-						<%= episode["Episode"]%>
-						<%= episode["Title"] %>
-					</div>
+					<span><%= episode["Episode"]%></span>
+					<%= episode["Title"] %>
 				</a>
 			</li>
 		<% end %>

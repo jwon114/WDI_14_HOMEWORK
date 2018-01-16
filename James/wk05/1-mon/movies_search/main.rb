@@ -9,6 +9,13 @@ require_relative 'models/search_history'
 require_relative 'models/movie_season_episode'
 require 'pry'
 
+
+# TODO LIST
+# wrap movie text in movie listing view so text is the width of the poster
+# storing movie season episodes in database? Issue with checking if all episodes are in the database, possibly add column for last updated and check in a months time then update again
+# styling the season episodes in a 3 column grid
+
+
 get '/' do
 
   	erb :index
@@ -78,11 +85,19 @@ get '/movie/:id' do
 end
 
 get '/movie/:id/:season' do
+	# episode_total = HTTParty.get("http://omdbapi.com/?apikey=2f6435d9&i=#{params[:id]}&season=#{params[:season]}")["Episodes"].count
 	# episode_result = MovieSeasonEpisode.where(series_id: params[:id], season: params[:season]).order("episode")
 	
 	# if episode_result
-	# 	episode_result.each do |episode|
+	# 	1.upto(episode_total) do |episode_number|
+	# 		if episode_result[episode_number][:episode] != episode_number.to_s
 
+	# 		end
+	#	end
+	# 		
+	# 	end
+	# 	episode_result.each do |episode|
+	# 		if MovieSeasonEpisode.where(episode: )
 	# 	end
 	# 	@episode_list = episode_result
 	# else 
