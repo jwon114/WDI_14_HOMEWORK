@@ -22,7 +22,9 @@ class StudentsController < ApplicationController
 	end
 
 	def sorting_hat
-		return rand(1..4)
+		random = rand(0..3)
+		houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+		return House.where(name: houses[random]).first.id
 	end
 
 end
