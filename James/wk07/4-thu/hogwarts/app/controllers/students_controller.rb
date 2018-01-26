@@ -1,7 +1,8 @@
 class StudentsController < ApplicationController
+	include StudentHelper
 
 	def index
-		@students = Student.all
+		@students = Student.all.order(:id)
 	end
 
 	def show
@@ -15,16 +16,16 @@ class StudentsController < ApplicationController
 		new_student.img_url = params[:img_url]
 		
 		if new_student.save
-			redirect_to '/'
+			redirect_to '/students'
 		else
 			render :new
 		end
 	end
 
-	def sorting_hat
-		random = rand(0..3)
-		houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-		return House.where(name: houses[random]).first.id
-	end
+	# def sorting_hat
+	# 	random = rand(0..3)
+	# 	houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
+	# 	return House.where(name: houses[random]).first.id
+	# end
 
 end
