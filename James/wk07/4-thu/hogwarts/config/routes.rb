@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  get '/', to: "pages#home"
+  root "houses#index"
   resources :houses, only: [:index, :show]
   resources :students, only: [:index, :show, :new, :create]
 

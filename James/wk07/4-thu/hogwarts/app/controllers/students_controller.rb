@@ -21,11 +21,4 @@ class StudentsController < ApplicationController
 			render :new
 		end
 	end
-
-	# def sorting_hat
-	# 	random = rand(0..3)
-	# 	houses = ["Gryffindor", "Hufflepuff", "Ravenclaw", "Slytherin"]
-	# 	return House.where(name: houses[random]).first.id
-	# end
-
 end
