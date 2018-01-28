@@ -17,23 +17,22 @@ cities.forEach(city => {
 
 dropDown.addEventListener('change', function() {
 	var selectedCity = dropDown.options[dropDown.selectedIndex].text;
-	var bodyElement = document.body;
-	bodyElement.className = "";
+	document.body.className = "";
 	switch(selectedCity) {
 		case 'NYC':
-			bodyElement.classList.add('nyc'); 
+			document.body.classList.add('nyc'); 
 			break;
 		case 'SF':
-			bodyElement.classList.add('sf');
+			document.body.classList.add('sf');
 			break;
 		case 'LA':
-			bodyElement.classList.add('la');
+			document.body.classList.add('la');
 			break;
 		case 'SYD':
-			bodyElement.classList.add('sydney');
+			document.body.classList.add('sydney');
 			break;
 		case 'ATX':
-			bodyElement.classList.add('austin');
+			document.body.classList.add('austin');
 			break;
 		default:
 			break;
