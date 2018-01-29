@@ -1,0 +1,55 @@
+label, input {
+	display: block;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.wrapper {
+	width: 300px;
+	position: relative;
+}
+
+.wrapper span {
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	font-size: 30px;
+}
+
+.project {
+	width: 50%;
+	/*float: left;*/
+	background-color: mistyrose;
+}
+
+.project h2 {
+	display: none;
+}
+
+.project img {
+	/* removes the space between the images */
+	display: block;
+}
+
+.like-button {
+	cursor: pointer;
+}
+
+@media (min-width: 700px) {
+	.project {
+		width: 33.333%;
+	}
+
+	.project h2 {
+		display: block;
+	}
+}
+
+@media (min-width: 1000px) {
+	.project {
+		width: 25%;
+	}
+} 
