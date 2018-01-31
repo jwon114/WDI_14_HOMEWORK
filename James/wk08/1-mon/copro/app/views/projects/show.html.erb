@@ -1,0 +1,42 @@
+<div class="project_details">
+	<h1><%= @project.title %></h1>
+	
+	<div class="wrapper">
+		<img src="<%= @project.preview %>" alt="">
+		<span class="like-button">&#128293;</span>
+	</div>
+
+	<form action="/likes" method="post">
+		<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+		<input type="hidden" name="project_id" value="<%= @project.id %>">
+		<span class="like-count"><%= @project.likes.count %></span>
+		<button>like</button>
+	</form>
+	<% if logged_in? %>
+		<form action="/comments" method="post">
+			<textarea name="comment_text" id="" cols="30" rows="10" placeholder="Comments"></textarea>
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input type="hidden" name="project_id" value="<%= @project.id %>">
+			<button>Submit</button>
+		</form>
+	<% end %>
+	<% if @comments %>
+		<ul>
+			<% @comments.each do |comment| %>
+				<li>
+					<span><%= comment.body %></span>	
+					<span><%= comment.user.email %></span>	
+				</li>
+			<% end %>
+		</ul>
+	<% end %>
+</div>
+
+<script>
+	var like_button = document.querySelector('.like-button');
+	var like_count = like_button.closest('.project_details').querySelector('.like-count');
+	// var like_count = document.querySelector('.like-count'); // can just select this class because its the only one on page
+	like_button.addEventListener('click', function() {
+		like_count.textContent++;
+	})
+</script>
