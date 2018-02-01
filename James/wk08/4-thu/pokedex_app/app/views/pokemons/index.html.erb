@@ -1,0 +1,16 @@
+<a href="/pokemons/new">Catch new Pokemans</a>
+<a href="/pokedexes">See the Pokedex</a>
+
+<h1>See my Pokemans</h1>
+
+<% if @pokemons.length > 0 %>
+	<% @pokemons.each do |pokemon| %>
+		<div class="pokemon-container">
+			<p><%= pokemon.species %></p>
+			<p><%= pokemon.nickname %></p>
+			<p><%= pokemon.level %></p>
+		</div>
+	<% end %>
+<% else %>
+	<h2>You have no Pokemans</h2>
+<% end %>

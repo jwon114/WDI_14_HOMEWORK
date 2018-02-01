@@ -1,0 +1,13 @@
+// Place all the styles related to the pokedexes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.pokedex-container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.pokemon-container {
+	margin: 10px;
+	border: 1px solid black;
+}

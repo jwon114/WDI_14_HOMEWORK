@@ -1,0 +1,21 @@
+<a href="/">Back to my Pokemans</a>
+
+<h1>PokeDex</h1>
+
+<% if @pokemons.length != 0 %>
+	<div class="pokedex-container">
+		<% @pokemons.each do |pokemon| %>
+			<div class="pokemon-container">
+				<h2><%= pokemon.species %></h2>
+				<p>Height <%= pokemon.height %></p>
+				<p>Weight <%= pokemon.weight %></p>
+				<p>Type(s)</p>
+				<% pokemon.poketypes.each do |type| %>
+					<p><%= type.pokemon_type %></p>
+				<% end %>
+				<img src="<%= pokemon.image_url %>" alt="">
+			</div>
+		<% end %>
+	</div>
+<% end %>
+

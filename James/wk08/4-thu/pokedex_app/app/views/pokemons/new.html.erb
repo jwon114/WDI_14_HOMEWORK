@@ -1,0 +1,14 @@
+<a href="/">Back to PokeDex</a>
+
+<h1>Catch new Pokemans</h1>
+
+<form action="/pokemons" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="">Pokemon Species</label>
+	<input type="text" name="species">
+	<label for="">Nickname</label>
+	<input type="text" name="nickname">
+	<label for="">Level</label>
+	<input type="text" name="level">
+	<button>Catch!</button>
+</form>
