@@ -17,6 +17,8 @@
 
 # POKEDEX
 
+# ActiveRecord::Base.connection.reset_pk_sequence!('Pokedex')
+
 # Pokedex.create(species:"bulbasaur", height: 7, weight: 69, image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png")
 # Pokedex.create(species:"ivysaur", height: 10, weight: 130, image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png")
 # Pokedex.create(species:"venusaur", height: 20, weight: 1000, image_url: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png")

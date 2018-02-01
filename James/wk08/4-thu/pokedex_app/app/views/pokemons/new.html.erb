@@ -2,13 +2,47 @@
 
 <h1>Catch new Pokemans</h1>
 
-<form action="/pokemons" method="post">
+<form class="new-pokemon-form" action="/pokemons" method="post">
 	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<label for="">Pokemon Species</label>
-	<input type="text" name="species">
-	<label for="">Nickname</label>
-	<input type="text" name="nickname">
-	<label for="">Level</label>
-	<input type="text" name="level">
-	<button>Catch!</button>
+	<div>
+		<label for="">Pokemon Species</label>
+		<ul class="pokemon-catch-list">
+			<% @pokemons.each do |pokemon| %>
+				<li class="pokemon">
+					<span class="pokemon-id"><%= pokemon.id %></span>
+					<span class="species"><%= pokemon.species %></span>
+				</li>
+			<% end %>
+		</ul>
+	</div>
+	<div>
+		<img class="pokemon-sprite" src="" alt="">
+	</div>
+	<!-- <input type="text" name="species"> -->
+	<div>
+		<label for="">Nickname</label>
+		<input type="text" name="nickname">
+		<label for="">Level</label>
+		<input type="text" name="level">
+
+		<button>Catch!</button>
+	</div>
+	<script>
+		$('.pokemon-catch-list li').on('click', function() {
+			console.log($($(this).children('.pokemon-id')[0]).text());
+			var id = $($(this).children('.pokemon-id')[0]).text()
+			
+			var options = {
+				url: '/api/pokemons',
+				method: 'get',
+				data: { pokemon_id: id }
+			}
+			
+			$.ajax(options)
+			.done(function(response) {
+				console.log(response);
+				$('.pokemon-sprite').attr('src', response.image_url)
+			})
+		})
+	</script>
 </form>
