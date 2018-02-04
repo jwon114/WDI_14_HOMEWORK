@@ -5,12 +5,52 @@
 
 <% if @pokemons.length > 0 %>
 	<% @pokemons.each do |pokemon| %>
-		<div class="pokemon-container">
-			<p><%= pokemon.species %></p>
+		<div class="pokemon-container" data-pokemon-id="<%= pokemon.id %>">
+			<p class="pokemon-species"><%= pokemon.species %></p>
 			<p><%= pokemon.nickname %></p>
 			<p><%= pokemon.level %></p>
+			<a href="#release-modal" rel="modal:open">
+				<button class="release-button" data-pokemon-id="<%= pokemon.id %>">Release</button>
+			</a>
 		</div>
 	<% end %>
+	<div id="release-modal" class="modal">
+		<p>Are you sure you want to release this pokemon?</p>
+		<button class="release-modal-yes">Yes</button>
+		<a href="#" rel="modal:close">
+			<button>No</button>
+		</a>
+	</div>
 <% else %>
 	<h2>You have no Pokemans</h2>
 <% end %>
+
+<script>
+	$('.release-button').on('click', function() {
+		var pokemonId = $(this).data('pokemonId');
+		$('.release-modal-yes').data('pokemonId', pokemonId);
+		console.log('release button pokemonId', pokemonId);
+	})
+
+	$('.release-modal-yes').on('click', function() {
+		console.log(this);
+		var pokemonId = $(this).data('pokemonId')
+		console.log(pokemonId);
+
+		var options = {
+			url: '/api/pokemons',
+			method: 'delete',
+			data: { pokemon_id: pokemonId }
+		}
+
+		$.ajax(options)
+		.done(function(response) {
+			if (response && response.result === 'Pokemon Deleted') {
+				console.log(response);
+				$('.pokemon-container[data-pokemon-id="' + response.pokemon_id + '"]').first().remove()
+				$('.close-modal').trigger('click');
+			}
+		})
+
+	})
+</script>

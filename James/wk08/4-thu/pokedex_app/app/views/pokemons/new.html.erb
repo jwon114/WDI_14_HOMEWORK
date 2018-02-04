@@ -1,48 +1,143 @@
-<a href="/">Back to PokeDex</a>
+<a href="/">Back to My Pokemans</a>
 
-<h1>Catch new Pokemans</h1>
+<h1 class="new-title">Catch new Pokemans</h1>
 
-<form class="new-pokemon-form" action="/pokemons" method="post">
-	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-	<div>
-		<label for="">Pokemon Species</label>
+<div class="new-pokemon-container">
+	<div class="pokemon-catch-list-container">
+		<div class="pokemon-catch-list-header">
+			<span>Species</span>
+			<div>
+				<span>Pokemon Type</span>
+				<select class="pokemon-type-filter" name="" id="">
+					<option value="all">All</option>
+					<% @poketypes.each do |type| %>
+						<option value="<%= type.pokemon_type %>"><%= type.pokemon_type %></option>
+					<% end %>
+				</select>
+			</div>
+		</div>
 		<ul class="pokemon-catch-list">
 			<% @pokemons.each do |pokemon| %>
 				<li class="pokemon">
 					<span class="pokemon-id"><%= pokemon.id %></span>
 					<span class="species"><%= pokemon.species %></span>
+					<% pokemon.poketypes.each do |type| %>
+						<span class="pokemon-type" value="<%= type.pokemon_type %>"><%= type.pokemon_type %></span>
+					<% end %>
 				</li>
 			<% end %>
 		</ul>
 	</div>
-	<div>
-		<img class="pokemon-sprite" src="" alt="">
-	</div>
-	<!-- <input type="text" name="species"> -->
-	<div>
-		<label for="">Nickname</label>
-		<input type="text" name="nickname">
-		<label for="">Level</label>
-		<input type="text" name="level">
 
-		<button>Catch!</button>
+	<div class="pokemon-details-container">
+		<div class="pokemon-sprite-container">
+			<img class="pokemon-sprite" src="" alt="">
+		</div>
+		<div class="pokemon-details">
+			<p>Species: <span class="pokemon-details-species"></p>
+			<p>Height: <span class="pokemon-details-height"></p>
+			<p>Weight: <span class="pokemon-details-weight"></p>
+			<p>Types: <span class="pokemon-details-types"></p>
+		</div>
 	</div>
-	<script>
-		$('.pokemon-catch-list li').on('click', function() {
-			console.log($($(this).children('.pokemon-id')[0]).text());
-			var id = $($(this).children('.pokemon-id')[0]).text()
-			
+
+	<div class="new-pokemon-form-container">
+		<form class="new-pokemon-form" action="" method="">
+			<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+			<input class="pokemon-id-hidden" type="hidden" name="pokemon_id">
+			<label class="nickname-label" for="">Nickname</label>
+			<input class="nickname-input" type="text" name="nickname">
+			<label class="level-label" for="">Level</label>
+			<input class="level-input" type="text" name="level">
+
+			<button>Catch!</button>
+		</form>
+		<div class="pokemon-errors"></div>
+	</div>
+</div>
+
+<script>
+	$('.pokemon-type-filter').on('change', function() {
+		var selectedType = $('.pokemon-type-filter option:selected').val();
+		$('.pokemon-catch-list .pokemon').each(function(index, pokemon) {
+			// .map creates a jQuery object array containing the value attributes, .get with no parameter transforms the jQuery object array to a JS array 
+			var typesArray = $(pokemon).children('.pokemon-type').map(function() {
+				return $(this).attr('value');
+			}).get();
+
+			// if the selected type is not found in the types array then hide the pokemon otherwise show it	
+			if ($.inArray(selectedType, typesArray) === -1) {
+				$(pokemon).hide();
+			} else {
+				$(pokemon).show();
+			}
+		})
+
+		if (selectedType === 'all') {
+			$('.pokemon-catch-list .pokemon').show();
+		}
+	})
+
+
+	$('.pokemon-catch-list .pokemon').on('click', function() {
+		console.log($($(this).children('.pokemon-id')[0]).text());
+		var id = $($(this).children('.pokemon-id')[0]).text()
+		
+		var options = {
+			url: '/api/pokemons',
+			method: 'get',
+			data: { pokemon_id: id }
+		}
+		
+		$.ajax(options)
+		.done(function(response) {
+			if (response) {
+				$('.pokemon-sprite').attr('src', response.image_url)
+				$('.pokemon-details-species').text(response.species)
+				// height is stored as an integer up to 2 digits
+				if (response.height >= 10) {
+					var height = String(response.height).split('')
+					height.splice(height.length - 1, 0, '.');
+					height = height.join('')
+					$('.pokemon-details-height').text(height + ' m')
+				} else {
+					$('.pokemon-details-height').text("0." + response.height + ' m')
+				}
+				$('.pokemon-details-weight').text(response.weight + ' lbs')
+				var poketypes = '';
+				response.types.forEach(function(type) {
+					poketypes += '<span>' + type.pokemon_type + '</span>';
+				})
+				$('.pokemon-details-types').html(poketypes)
+				$('.pokemon-id-hidden').val(response.id)
+			}
+		})
+	})
+
+	$('.new-pokemon-form').on('submit', function(event) {
+		event.preventDefault();
+		if ($('.pokemon-id-hidden').val() !== '') {
+			$('.pokemon-errors').text('');
 			var options = {
 				url: '/api/pokemons',
-				method: 'get',
-				data: { pokemon_id: id }
+				method: 'post',
+				data: { 
+					pokemon_id: $('.pokemon-id-hidden').val(), 
+					nickname: $('.nickname-input').val(),
+					level: $('.level-input').val()
+				}
 			}
-			
+
 			$.ajax(options)
 			.done(function(response) {
-				console.log(response);
-				$('.pokemon-sprite').attr('src', response.image_url)
+				console.log('here');
+				if (response && response.result === 'Pokemon Caught') {
+					window.location.href = '/'
+				}
 			})
-		})
-	</script>
-</form>
+		} else {
+			console.log('here');
+			$('.pokemon-errors').text("Click on a Pokemon first before clicking Catch")
+		}
+	})
+</script>
