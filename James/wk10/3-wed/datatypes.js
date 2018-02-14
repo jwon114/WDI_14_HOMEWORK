@@ -28,9 +28,9 @@ typeof true
 // Prediction: boolean
 // Actual: boolean
 
-typeof 1 != 2
-// Prediction: true
-// Actual: true
+typeof (1 != 2)
+// Prediction: boolean
+// Actual: boolean
 
 
 "hamburger" + "s"
