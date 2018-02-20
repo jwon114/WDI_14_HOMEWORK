@@ -1,0 +1,9 @@
+<link rel="stylesheet" href="css/styles.css">
+<body style="background-color: <%= color %>">
+    <div class="main">
+        <% if (locals.name) { %>
+            <h2>Hi <%= name %></h2>
+        <% } %>
+        <p class="compliment"><%= compliment %></p>
+    </div>
+</body>

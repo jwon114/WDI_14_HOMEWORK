@@ -1,0 +1,19 @@
+body {
+    background-color: mistyrose;
+}
+
+h2 {
+    font-size: 60px;
+}
+
+.main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.compliment {
+    font-size: 50px;
+}
